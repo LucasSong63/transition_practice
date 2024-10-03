@@ -9,6 +9,8 @@ import 'package:transition_practice/features/start/presentation/widgets/fade_tra
 import 'package:transition_practice/features/start/presentation/widgets/spacer_box.dart';
 
 class LoginPage extends StatelessWidget {
+  const LoginPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +24,7 @@ class LoginPage extends StatelessWidget {
           return SingleChildScrollView(
             // Wrap the whole body in SingleChildScrollView to allow scrolling
             child: Center(
-              child: Container(
+              child: SizedBox(
                 width: boxWidth,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -37,7 +39,7 @@ class LoginPage extends StatelessWidget {
                     SpacerBox(boxHeight * 0.05),
 
                     // Welcome Text
-                    AutoSizeText(
+                    const AutoSizeText(
                       'Welcome Back',
                       style: TextStyle(
                         fontSize: 30,
@@ -47,7 +49,7 @@ class LoginPage extends StatelessWidget {
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
-                    SpacerBox(5),
+                    const SpacerBox(5),
                     AutoSizeText(
                       'Log in to access your account',
                       style: TextStyle(
@@ -72,16 +74,16 @@ class LoginPage extends StatelessWidget {
                           return null; // Valid input
                         }),
 
-                    SpacerBox(30),
+                    const SpacerBox(30),
 
                     // Password TextField
-                    CustomTextFormField(
+                    const CustomTextFormField(
                       icon: Icons.lock_outline,
                       labelText: 'Password',
                       obscureText: true,
                     ),
 
-                    SpacerBox(15),
+                    const SpacerBox(15),
 
                     // Forgot Password Text
                     Container(
@@ -93,7 +95,7 @@ class LoginPage extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SpacerBox(30),
+                    const SpacerBox(30),
 
                     // Login Button
                     CustomButton(
@@ -102,33 +104,31 @@ class LoginPage extends StatelessWidget {
                       width: double.infinity,
                       height: clampedButtonHeight,
                     ),
-                    SpacerBox(20),
+                    const SpacerBox(20),
 
                     // Not Registered Yet? Sign Up
-                    Container(
-                      child: RichText(
-                        text: TextSpan(
-                          children: [
-                            TextSpan(
-                              text: 'Not Registered yet?',
-                              style: TextStyle(
-                                color: Colors.black.withOpacity(0.3),
-                              ),
+                    RichText(
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+                            text: 'Not Registered yet?',
+                            style: TextStyle(
+                              color: Colors.black.withOpacity(0.3),
                             ),
-                            TextSpan(
-                              text: '  Sign Up',
-                              style: TextStyle(
-                                color: Color.fromRGBO(60, 125, 236, 1.0),
-                                fontWeight: FontWeight.bold,
-                              ),
-                              recognizer: TapGestureRecognizer()
-                                ..onTap = () {
-                                  Navigator.of(context)
-                                      .push(FadeTransitionPage(SignUpPage()));
-                                },
+                          ),
+                          TextSpan(
+                            text: '  Sign Up',
+                            style: const TextStyle(
+                              color: Color.fromRGBO(60, 125, 236, 1.0),
+                              fontWeight: FontWeight.bold,
                             ),
-                          ],
-                        ),
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () {
+                                Navigator.of(context).push(
+                                    FadeTransitionPage(const SignUpPage()));
+                              },
+                          ),
+                        ],
                       ),
                     ),
                     SpacerBox(boxHeight * 0.1),

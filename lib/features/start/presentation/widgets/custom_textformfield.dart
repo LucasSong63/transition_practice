@@ -11,7 +11,8 @@ class CustomTextFormField extends StatefulWidget {
   final bool showSuffixIcon; // New boolean flag to control the suffix icon
 
   // Constructor to accept icon, labelText, obscureText, optional controller, and suffix icon flag
-  CustomTextFormField({
+  const CustomTextFormField({
+    super.key,
     this.icon, // Either icon or assetPath should be provided
     this.assetPath,
     required this.labelText,
@@ -47,7 +48,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       controller: widget.controller, // Use the controller if provided
       obscureText: widget.obscureText, // Obscure text if it's a password field
       decoration: InputDecoration(
-        labelStyle: TextStyle(fontSize: 13),
+        labelStyle: const TextStyle(fontSize: 13),
         prefixIcon: widget.assetPath != null
             ? Padding(
                 padding: const EdgeInsets.all(11.0),
@@ -60,12 +61,12 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
               )
             : Icon(widget.icon), // Otherwise, use the icon dynamically
         suffixIcon: widget.showSuffixIcon && !_isEmpty && _isValid
-            ? Icon(
+            ? const Icon(
                 Icons.check_sharp,
                 size: 20,
               )
             : null, // Conditionally show check icon if valid, not empty, and flag is true
-        labelText: '  ' + widget.labelText, // Set the label dynamically
+        labelText: '  ${widget.labelText}', // Set the label dynamically
       ),
       autovalidateMode: AutovalidateMode.onUserInteraction,
       validator: widget.validator,

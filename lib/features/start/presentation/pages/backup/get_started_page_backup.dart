@@ -125,7 +125,7 @@ class _get_started_bodyState extends State<get_started_body> {
           boxWidth = boxWidth.clamp(100.0, 1000.0);
           boxHeight = boxHeight.clamp(400, 700);
 
-          return Container(
+          return SizedBox(
             width: boxWidth,
             height: boxHeight,
             child: Column(
@@ -135,10 +135,10 @@ class _get_started_bodyState extends State<get_started_body> {
                   height: boxHeight * 0.2,
                   child: Image.asset('assets/images/logo1.png'),
                 ),
-                SizedBox(height: 40), //spacer
+                const SizedBox(height: 40), //spacer
                 Container(
                   width: boxWidth,
-                  padding: EdgeInsets.only(right: 65),
+                  padding: const EdgeInsets.only(right: 65),
                   child: const AutoSizeText(
                     'Manage your assets in a single system',
                     style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
@@ -147,8 +147,8 @@ class _get_started_bodyState extends State<get_started_body> {
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
-                SizedBox(height: 20),
-                Container(
+                const SizedBox(height: 20),
+                SizedBox(
                   width: boxWidth,
                   child: const AutoSizeText(
                     'Empower your business with the power of precision asset tracking today. Join the future of asset management with Zenzaiko!',
@@ -161,13 +161,13 @@ class _get_started_bodyState extends State<get_started_body> {
                 Padding(
                   padding: EdgeInsets.only(top: boxHeight * 0.13),
                   child: AnimatedContainer(
-                    duration: Duration(milliseconds: 500),
+                    duration: const Duration(milliseconds: 500),
                     curve: Curves.bounceOut,
                     width: double.infinity,
                     height: 70,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(50),
-                        gradient: LinearGradient(colors: [
+                        gradient: const LinearGradient(colors: [
                           Color.fromARGB(255, 0, 28, 136),
                           Colors.blue
                         ])),

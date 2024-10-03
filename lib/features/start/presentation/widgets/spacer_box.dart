@@ -4,7 +4,7 @@ class SpacerBox extends StatelessWidget {
   final double height;
 
   // Constructor to accept the height parameter
-  SpacerBox(this.height);
+  const SpacerBox(this.height, {super.key});
 
   @override
   Widget build(BuildContext context) {

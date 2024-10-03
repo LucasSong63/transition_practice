@@ -49,7 +49,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     ),
                   ),
                 ),
-                SpacerBox(15),
+                const SpacerBox(15),
                 Container(
                   alignment: Alignment.centerLeft,
                   child: RichText(
@@ -76,7 +76,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     ),
                   ),
                 ),
-                SpacerBox(20),
+                const SpacerBox(20),
                 CustomTextFormField(
                   //////////Name TextFormField
                   assetPath: 'assets/images/person.png',
@@ -95,7 +95,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     return null; // Valid input
                   },
                 ),
-                SpacerBox(20),
+                const SpacerBox(20),
                 CustomTextFormField(
                   //////////Surname TextFormField
                   assetPath: 'assets/images/family-tree.png',
@@ -114,7 +114,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     return null; // Valid input
                   },
                 ),
-                SpacerBox(20),
+                const SpacerBox(20),
                 CustomTextFormField(
                     //////////Email TextFormField
                     assetPath: 'assets/images/email.png',
@@ -131,7 +131,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       }
                       return null; // Valid input
                     }),
-                SpacerBox(20),
+                const SpacerBox(20),
                 CustomTextFormField(
                     ////////// Username TextFormField
                     assetPath: 'assets/images/profile-avatar.png',
@@ -147,7 +147,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
                       return null; // Valid input
                     }),
-                SpacerBox(20),
+                const SpacerBox(20),
                 CustomTextFormField(
                   ////////// Password TextFormField
                   assetPath: 'assets/images/open-lock.png',
@@ -165,7 +165,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   },
                   obscureText: true,
                 ),
-                SpacerBox(20),
+                const SpacerBox(20),
                 CustomTextFormField(
                     ////////// Password Repeat TextFormField
                     assetPath:
@@ -183,7 +183,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       }
                       return null; // Valid input
                     }),
-                SpacerBox(20),
+                const SpacerBox(20),
                 CustomTextFormField(
                   ////////// Workplace TextFormField
                   assetPath: 'assets/images/workplace.png', // Workplace icon
@@ -198,7 +198,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     return null; // Valid input
                   },
                 ),
-                SpacerBox(20),
+                const SpacerBox(20),
                 DropdownButtonFormField<String>(
                   items: ['Company', 'Personal']
                       .map((item) => DropdownMenuItem<String>(
@@ -222,13 +222,13 @@ class _SignUpPageState extends State<SignUpPage> {
                     ),
                   ),
                 ),
-                SpacerBox(50),
+                const SpacerBox(50),
                 CustomButton(
                     width: double.infinity,
                     height: clampedButtonHeight,
                     text: 'Register',
                     onTap: () {}),
-                SpacerBox(50),
+                const SpacerBox(50),
               ],
             ),
           ),

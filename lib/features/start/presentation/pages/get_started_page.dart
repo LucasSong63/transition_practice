@@ -7,6 +7,8 @@ import 'package:transition_practice/features/start/presentation/widgets/fade_tra
 import 'package:transition_practice/features/start/presentation/widgets/get_started_background.dart';
 
 class GetStartedPage extends StatefulWidget {
+  const GetStartedPage({super.key});
+
   @override
   State<GetStartedPage> createState() => _GetStartedPageState();
 }
@@ -15,8 +17,7 @@ class _GetStartedPageState extends State<GetStartedPage>
     with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
-    return Scaffold(
+    return const Scaffold(
         backgroundColor: Colors.white,
         body: Stack(
           children: [get_started_background(), get_started_body()],
@@ -46,7 +47,7 @@ class _get_started_bodyState extends State<get_started_body> {
           double clampedButtonHeight = (boxHeight * 0.125).clamp(50, 70);
 
           return SingleChildScrollView(
-            child: Container(
+            child: SizedBox(
               width: boxWidth,
               height: boxHeight,
               child: Stack(children: [
@@ -64,7 +65,7 @@ class _get_started_bodyState extends State<get_started_body> {
                     Container(
                       width: boxWidth,
                       height: boxHeight * 0.1,
-                      padding: EdgeInsets.only(right: 65),
+                      padding: const EdgeInsets.only(right: 65),
                       child: const AutoSizeText(
                         'Manage your assets in a single system',
                         style: TextStyle(
@@ -75,7 +76,7 @@ class _get_started_bodyState extends State<get_started_body> {
                       ),
                     ),
                     SizedBox(height: boxHeight * 0.025),
-                    Container(
+                    SizedBox(
                       width: boxWidth,
                       height: boxHeight * 0.25,
                       child: const AutoSizeText(
@@ -100,7 +101,7 @@ class _get_started_bodyState extends State<get_started_body> {
                     height: clampedButtonHeight,
                     onTap: () {
                       Navigator.of(context)
-                          .push(FadeTransitionPage(LoginPage()));
+                          .push(FadeTransitionPage(const LoginPage()));
                     },
                   ),
                 ),
