@@ -17,24 +17,25 @@ class _GetStartedPageState extends State<GetStartedPage>
     with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    var size = MediaQuery.of(context).size;
+    return Scaffold(
         backgroundColor: Colors.white,
         body: Stack(
-          children: [get_started_background(), get_started_body()],
+          children: [GetStartedBackground(size: size), const GetStartedBody()],
         ));
   }
 }
 
-class get_started_body extends StatefulWidget {
-  const get_started_body({
+class GetStartedBody extends StatefulWidget {
+  const GetStartedBody({
     super.key,
   });
 
   @override
-  State<get_started_body> createState() => _get_started_bodyState();
+  State<GetStartedBody> createState() => _GetStartedBodyState();
 }
 
-class _get_started_bodyState extends State<get_started_body> {
+class _GetStartedBodyState extends State<GetStartedBody> {
   DateTime? firstClickTime;
 
   @override
