@@ -1,11 +1,14 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:transition_practice/features/start/prensetation/widgets/custom_button.dart';
-import 'package:transition_practice/features/start/prensetation/widgets/spacer_box.dart';
+import 'package:sizer/sizer.dart';
+import 'package:transition_practice/features/start/presentation/widgets/custom_button.dart';
+import 'package:transition_practice/features/start/presentation/widgets/spacer_box.dart';
 
 import '../widgets/custom_textformfield.dart';
 
 class SignUpPage extends StatefulWidget {
+  const SignUpPage({super.key});
+
   @override
   State<SignUpPage> createState() => _SignUpPageState();
 }
@@ -24,15 +27,12 @@ class _SignUpPageState extends State<SignUpPage> {
       ),
       body: LayoutBuilder(
           builder: (BuildContext context, BoxConstraints constraints) {
-        double boxWidth = constraints.maxWidth * 0.9;
-        double boxHeight = constraints.maxHeight * 0.9;
-        boxWidth = boxWidth.clamp(100.0, 1000.0);
-        boxHeight = boxHeight.clamp(400, 700);
-
+        double boxWidth = 80.w.clamp(100.0, 1000.0);
+        double boxHeight = 90.h.clamp(400, 700);
         double clampedButtonHeight = (boxHeight * 0.125).clamp(50, 70);
         return SingleChildScrollView(
           child: Container(
-            padding: EdgeInsets.only(
+            padding: const EdgeInsets.only(
               left: 50,
             ),
             width: boxWidth,
@@ -63,7 +63,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         ),
                         TextSpan(
                           text: '  Login Here',
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Color.fromRGBO(60, 125, 236, 1.0),
                             fontWeight: FontWeight.bold,
                           ),
@@ -211,7 +211,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   },
                   decoration: InputDecoration(
                     labelText: '  Choose One: Company/Personal',
-                    labelStyle: TextStyle(fontSize: 13),
+                    labelStyle: const TextStyle(fontSize: 13),
                     prefixIcon: Padding(
                       padding: const EdgeInsets.all(11.0),
                       child: Image.asset(

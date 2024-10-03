@@ -1,11 +1,12 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:transition_practice/features/start/prensetation/pages/sign_up_page.dart';
-import 'package:transition_practice/features/start/prensetation/widgets/custom_button.dart';
-import 'package:transition_practice/features/start/prensetation/widgets/custom_textformfield.dart';
-import 'package:transition_practice/features/start/prensetation/widgets/fade_transition_page.dart';
-import 'package:transition_practice/features/start/prensetation/widgets/spacer_box.dart';
+import 'package:sizer/sizer.dart';
+import 'package:transition_practice/features/start/presentation/pages/sign_up_page.dart';
+import 'package:transition_practice/features/start/presentation/widgets/custom_button.dart';
+import 'package:transition_practice/features/start/presentation/widgets/custom_textformfield.dart';
+import 'package:transition_practice/features/start/presentation/widgets/fade_transition_page.dart';
+import 'package:transition_practice/features/start/presentation/widgets/spacer_box.dart';
 
 class LoginPage extends StatelessWidget {
   @override
@@ -14,10 +15,8 @@ class LoginPage extends StatelessWidget {
       appBar: AppBar(),
       body: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
-          double boxWidth = constraints.maxWidth * 0.8;
-          double boxHeight = constraints.maxHeight * 0.9;
-          boxWidth = boxWidth.clamp(100.0, 1000.0);
-          boxHeight = boxHeight.clamp(400, 700);
+          double boxWidth = 80.w.clamp(100.0, 1000.0);
+          double boxHeight = 90.h.clamp(400, 700);
           double clampedButtonHeight = (boxHeight * 0.125).clamp(50, 70);
 
           return SingleChildScrollView(

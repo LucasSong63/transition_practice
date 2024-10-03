@@ -1,9 +1,10 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:transition_practice/features/start/prensetation/pages/login_page.dart';
-import 'package:transition_practice/features/start/prensetation/widgets/custom_button.dart';
-import 'package:transition_practice/features/start/prensetation/widgets/fade_transition_page.dart';
-import 'package:transition_practice/features/start/prensetation/widgets/get_started_background.dart';
+import 'package:sizer/sizer.dart';
+import 'package:transition_practice/features/start/presentation/pages/login_page.dart';
+import 'package:transition_practice/features/start/presentation/widgets/custom_button.dart';
+import 'package:transition_practice/features/start/presentation/widgets/fade_transition_page.dart';
+import 'package:transition_practice/features/start/presentation/widgets/get_started_background.dart';
 
 class GetStartedPage extends StatefulWidget {
   @override
@@ -18,7 +19,7 @@ class _GetStartedPageState extends State<GetStartedPage>
     return Scaffold(
         backgroundColor: Colors.white,
         body: Stack(
-          children: [get_started_background(size: size), get_started_body()],
+          children: [get_started_background(), get_started_body()],
         ));
   }
 }
@@ -40,10 +41,8 @@ class _get_started_bodyState extends State<get_started_body> {
     return Center(
       child: LayoutBuilder(
         builder: (context, constraints) {
-          double boxWidth = constraints.maxWidth * 0.8;
-          double boxHeight = constraints.maxHeight * 0.9;
-          boxWidth = boxWidth.clamp(100.0, 1000.0);
-          boxHeight = boxHeight.clamp(400, 700);
+          double boxWidth = 80.w.clamp(100.0, 1000.0);
+          double boxHeight = 90.h.clamp(400, 700);
           double clampedButtonHeight = (boxHeight * 0.125).clamp(50, 70);
 
           return SingleChildScrollView(

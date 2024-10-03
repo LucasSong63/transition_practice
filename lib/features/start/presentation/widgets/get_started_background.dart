@@ -1,23 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 
 class get_started_background extends StatelessWidget {
   const get_started_background({
     super.key,
-    required this.size,
   });
-
-  final Size size;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(
-        top: size.height * 0.5,
+        top: 50.h,
       ),
       child: ClipPath(
         clipper: WaveClipper(),
         child: Container(
-          height: size.height * 0.5,
+          height: 50.h,
           decoration: const BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topLeft,
