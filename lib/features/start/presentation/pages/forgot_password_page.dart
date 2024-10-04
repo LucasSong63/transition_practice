@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
+import 'package:transition_practice/features/start/presentation/pages/login_page.dart';
 import 'package:transition_practice/features/start/presentation/widgets/custom_button.dart';
 import 'package:transition_practice/features/start/presentation/widgets/custom_textformfield.dart';
+import 'package:transition_practice/features/start/presentation/widgets/fade_transition_page.dart';
 import 'package:transition_practice/features/start/presentation/widgets/failed_dialog.dart';
 import 'package:transition_practice/features/start/presentation/widgets/spacer_box.dart';
 import 'package:transition_practice/features/start/presentation/widgets/success_dialog.dart';
@@ -94,17 +96,33 @@ class ForgotPasswordPage extends StatelessWidget {
                           height: clampedButtonHeight,
                           text: 'Send',
                           onTap: () {
-                            //pop up dialog with button ok, show successful sent email
-                            showDialog(
-                              context: context,
-                              builder: (context) {
-                                return SuccessDialog(
-                                  clampedButtonHeight: clampedButtonHeight,
-                                  DialogText:
-                                      'A password reset link has been sent to your email. Please check your email.',
-                                );
-                              },
-                            );
+                            _isValidationPass() ///////////Validation here
+                                ? showDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      return SuccessDialog(
+                                        onTap: () {
+                                          Navigator.of(context).push(
+                                              FadeTransitionPage(
+                                                  const LoginPage()));
+                                        },
+                                        clampedButtonHeight:
+                                            clampedButtonHeight,
+                                        DialogText:
+                                            'A password reset link has been sent to your email. Please check your email.',
+                                      );
+                                    },
+                                  )
+                                : showDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      return FailedDialog(
+                                        clampedButtonHeight:
+                                            clampedButtonHeight,
+                                        DialogText:
+                                            'An error occurred while sending the password reset link. Please try again.',
+                                      );
+                                    });
                           })
                     ],
                   ),
@@ -113,5 +131,9 @@ class ForgotPasswordPage extends StatelessWidget {
             ));
       },
     );
+  }
+
+  bool _isValidationPass() {
+    return false;
   }
 }

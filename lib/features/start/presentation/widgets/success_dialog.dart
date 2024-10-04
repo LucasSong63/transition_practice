@@ -6,11 +6,13 @@ import 'package:transition_practice/features/start/presentation/widgets/spacer_b
 class SuccessDialog extends StatelessWidget {
   final double clampedButtonHeight;
   final String DialogText;
+  final VoidCallback? onTap;
 
   const SuccessDialog({
     super.key,
     required this.clampedButtonHeight,
     this.DialogText = '',
+    this.onTap,
   });
 
   @override
@@ -50,12 +52,11 @@ class SuccessDialog extends StatelessWidget {
           actions: [
             Center(
                 child: CustomButton(
-                    width: double.infinity,
-                    height: clampedButtonHeight,
-                    text: 'Ok',
-                    onTap: () {
-                      Navigator.pop(context);
-                    })),
+              width: double.infinity,
+              height: clampedButtonHeight,
+              text: 'Ok',
+              onTap: onTap ?? () => Navigator.pop(context),
+            )),
           ],
         );
       },

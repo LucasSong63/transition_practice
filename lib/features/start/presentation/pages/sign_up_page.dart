@@ -1,8 +1,12 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
+import 'package:transition_practice/features/start/presentation/pages/login_page.dart';
 import 'package:transition_practice/features/start/presentation/widgets/custom_button.dart';
+import 'package:transition_practice/features/start/presentation/widgets/fade_transition_page.dart';
+import 'package:transition_practice/features/start/presentation/widgets/failed_dialog.dart';
 import 'package:transition_practice/features/start/presentation/widgets/spacer_box.dart';
+import 'package:transition_practice/features/start/presentation/widgets/success_dialog.dart';
 
 import '../widgets/custom_textformfield.dart';
 
@@ -227,7 +231,32 @@ class _SignUpPageState extends State<SignUpPage> {
                         width: double.infinity,
                         height: clampedButtonHeight,
                         text: 'Register',
-                        onTap: () {}),
+                        onTap: () {
+                          _isValidationPass() /////Validation function here
+                              ? showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return SuccessDialog(
+                                        onTap: () {
+                                          Navigator.of(context).push(
+                                              FadeTransitionPage(
+                                                  const LoginPage()));
+                                        },
+                                        clampedButtonHeight:
+                                            clampedButtonHeight,
+                                        DialogText:
+                                            'Your registration has been successful! Please wait for the email to confirm your registration.');
+                                  })
+                              : showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return FailedDialog(
+                                        clampedButtonHeight:
+                                            clampedButtonHeight,
+                                        DialogText:
+                                            'Username has been taken. Please try with a different username.');
+                                  });
+                        }),
                     const SpacerBox(50),
                   ],
                 ),
@@ -235,5 +264,9 @@ class _SignUpPageState extends State<SignUpPage> {
             ),
           ));
     });
+  }
+
+  bool _isValidationPass() {
+    return true;
   }
 }
