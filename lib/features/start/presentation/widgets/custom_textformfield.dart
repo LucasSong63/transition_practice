@@ -7,6 +7,7 @@ class CustomTextFormField extends StatefulWidget {
   final String labelText;
   final bool obscureText;
   final String? Function(String?)? validator;
+  final String hintText;
   final TextEditingController? controller;
   final bool showSuffixIcon; // New boolean flag to control the suffix icon
 
@@ -16,6 +17,7 @@ class CustomTextFormField extends StatefulWidget {
     this.icon, // Either icon or assetPath should be provided
     this.assetPath,
     required this.labelText,
+    this.hintText = '',
     this.obscureText =
         false, // By default, the text is not obscured (e.g., not a password)
     this.validator,
@@ -67,6 +69,12 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
               )
             : null, // Conditionally show check icon if valid, not empty, and flag is true
         labelText: '  ${widget.labelText}', // Set the label dynamically
+        hintText: widget.hintText,
+        hintStyle: TextStyle(
+          fontSize: 11,
+          fontWeight: FontWeight.w500,
+          color: Colors.black.withOpacity(0.4),
+        ),
       ),
       autovalidateMode: AutovalidateMode.onUserInteraction,
       validator: widget.validator,

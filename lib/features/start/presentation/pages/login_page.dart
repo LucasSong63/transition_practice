@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
+import 'package:transition_practice/features/start/presentation/pages/forgot_password_page.dart';
 import 'package:transition_practice/features/start/presentation/pages/sign_up_page.dart';
 import 'package:transition_practice/features/start/presentation/widgets/custom_button.dart';
 import 'package:transition_practice/features/start/presentation/widgets/custom_textformfield.dart';
@@ -13,15 +14,17 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints constraints) {
-          double boxWidth = 80.w.clamp(100.0, 1000.0);
-          double boxHeight = 90.h.clamp(400, 700);
-          double clampedButtonHeight = (boxHeight * 0.125).clamp(50, 70);
+    return Sizer(
+      builder: (BuildContext, Orientation, ScreenType) {
+        final double pixelDensity = MediaQuery.of(context).devicePixelRatio;
 
-          return SingleChildScrollView(
+        double boxWidth = 80.w.clamp(50.0 * pixelDensity, 800.0 * pixelDensity);
+        double boxHeight = 90.h.clamp(100 * pixelDensity, 700 * pixelDensity);
+        double clampedButtonHeight =
+            (boxHeight * 0.125).clamp(15 * pixelDensity, 23 * pixelDensity);
+        return Scaffold(
+          appBar: AppBar(),
+          body: SingleChildScrollView(
             // Wrap the whole body in SingleChildScrollView to allow scrolling
             child: Center(
               child: SizedBox(
@@ -39,26 +42,33 @@ class LoginPage extends StatelessWidget {
                     SpacerBox(boxHeight * 0.05),
 
                     // Welcome Text
-                    const AutoSizeText(
-                      'Welcome Back',
-                      style: TextStyle(
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
+                    Container(
+                      alignment: Alignment.centerLeft,
+                      child: AutoSizeText(
+                        'Welcome Back!',
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        minFontSize: 15,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
                       ),
-                      minFontSize: 15,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
                     ),
                     const SpacerBox(5),
-                    AutoSizeText(
-                      'Log in to access your account',
-                      style: TextStyle(
-                        fontSize: 15,
-                        color: Colors.black.withOpacity(0.4),
+                    Container(
+                      alignment: Alignment.centerLeft,
+                      child: AutoSizeText(
+                        'Log in to access your account',
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: Colors.black.withOpacity(0.4),
+                        ),
+                        minFontSize: 13,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
                       ),
-                      minFontSize: 13,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
                     ),
                     SpacerBox(boxHeight * 0.05),
 
@@ -86,12 +96,18 @@ class LoginPage extends StatelessWidget {
                     const SpacerBox(15),
 
                     // Forgot Password Text
-                    Container(
-                      alignment: Alignment.centerRight,
-                      child: Text(
-                        'Forgot Password?',
-                        style: TextStyle(
-                          color: Colors.black.withOpacity(0.3),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context)
+                            .push(FadeTransitionPage(ForgotPasswordPage()));
+                      },
+                      child: Container(
+                        alignment: Alignment.centerRight,
+                        child: Text(
+                          'Forgot Password?',
+                          style: TextStyle(
+                            color: Colors.black.withOpacity(0.3),
+                          ),
                         ),
                       ),
                     ),
@@ -136,9 +152,9 @@ class LoginPage extends StatelessWidget {
                 ),
               ),
             ),
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 }

@@ -1,59 +1,62 @@
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 
 class GetStartedBackground extends StatelessWidget {
-  final Size size;
-
   const GetStartedBackground({
     super.key,
-    required this.size,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        // First layer
-        Padding(
-          padding: EdgeInsets.only(top: size.height * 0.5),
-          child: ClipPath(
-            clipper: WaveClipper(),
-            child: Container(
-              height: size.height * 0.5,
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [
-                    Color(0xFF0D5AFF), // Darker blue on the top-left
-                    Color(0xFFFFFFFF), // White towards the bottom-right
-                  ],
+    return Sizer(
+      builder: (BuildContext, Orientation, ScreenType) {
+        return Stack(
+          children: [
+            // First layer
+            Padding(
+              padding: EdgeInsets.only(top: Device.height * 0.5),
+              child: ClipPath(
+                clipper: WaveClipper(),
+                child: Container(
+                  height: Device.height * 0.5,
+                  decoration: const BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [
+                        Color(0xFF0D5AFF), // Darker blue on the top-left
+                        Color(0xFFFFFFFF), // White towards the bottom-right
+                      ],
+                    ),
+                  ),
                 ),
               ),
             ),
-          ),
-        ),
-        // Second layer with transparency
-        Padding(
-          padding: EdgeInsets.only(top: size.height * 0.5),
-          child: ClipPath(
-            clipper:
-                SecondWaveClipper(), // Different clipper for a second curve
-            child: Container(
-              height: size.height * 0.5,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [
-                    Color(0x6C0D5AFF), // Transparent layer
-                    Color(0x37FFFFFF), // Fully transparent at the bottom-right
-                  ],
+            // Second layer with transparency
+            Padding(
+              padding: EdgeInsets.only(top: Device.height * 0.5),
+              child: ClipPath(
+                clipper:
+                    SecondWaveClipper(), // Different clipper for a second curve
+                child: Container(
+                  height: Device.height * 0.5,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [
+                        Color(0x6C0D5AFF), // Transparent layer
+                        Color(
+                            0x37FFFFFF), // Fully transparent at the bottom-right
+                      ],
+                    ),
+                  ),
                 ),
               ),
             ),
-          ),
-        ),
-      ],
+          ],
+        );
+      },
     );
   }
 }
