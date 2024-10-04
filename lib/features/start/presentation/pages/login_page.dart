@@ -21,7 +21,7 @@ class LoginPage extends StatelessWidget {
         double boxWidth = 80.w.clamp(50.0 * pixelDensity, 800.0 * pixelDensity);
         double boxHeight = 90.h.clamp(100 * pixelDensity, 700 * pixelDensity);
         double clampedButtonHeight =
-            (boxHeight * 0.125).clamp(15 * pixelDensity, 23 * pixelDensity);
+            (boxHeight * 0.125).clamp(15 * pixelDensity, 20 * pixelDensity);
         return Scaffold(
           appBar: AppBar(),
           body: SingleChildScrollView(

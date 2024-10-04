@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:transition_practice/features/start/presentation/widgets/custom_button.dart';
 import 'package:transition_practice/features/start/presentation/widgets/custom_textformfield.dart';
+import 'package:transition_practice/features/start/presentation/widgets/failed_dialog.dart';
 import 'package:transition_practice/features/start/presentation/widgets/spacer_box.dart';
+import 'package:transition_practice/features/start/presentation/widgets/success_dialog.dart';
 
 class ForgotPasswordPage extends StatelessWidget {
   @override
@@ -13,7 +15,7 @@ class ForgotPasswordPage extends StatelessWidget {
         double boxWidth = 80.w.clamp(50.0 * pixelDensity, 800.0 * pixelDensity);
         double boxHeight = 90.h.clamp(100 * pixelDensity, 700 * pixelDensity);
         double clampedButtonHeight =
-            (boxHeight * 0.125).clamp(15 * pixelDensity, 23 * pixelDensity);
+            (boxHeight * 0.125).clamp(15 * pixelDensity, 20 * pixelDensity);
         return Scaffold(
             appBar: AppBar(
               centerTitle: true,
@@ -96,18 +98,10 @@ class ForgotPasswordPage extends StatelessWidget {
                             showDialog(
                               context: context,
                               builder: (context) {
-                                return AlertDialog(
-                                  title: Text('Password Reset'),
-                                  content: Text(
-                                      'A password reset link has been sent to your email.'),
-                                  actions: [
-                                    TextButton(
-                                      onPressed: () {
-                                        Navigator.pop(context);
-                                      },
-                                      child: Text('OK'),
-                                    ),
-                                  ],
+                                return SuccessDialog(
+                                  clampedButtonHeight: clampedButtonHeight,
+                                  DialogText:
+                                      'A password reset link has been sent to your email. Please check your email.',
                                 );
                               },
                             );
