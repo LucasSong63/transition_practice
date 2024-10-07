@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:transition_practice/features/start/presentation/widgets/custom_button.dart';
 import 'package:transition_practice/features/start/presentation/widgets/custom_textformfield.dart';
+import 'package:transition_practice/features/start/presentation/widgets/failed_dialog.dart';
 import 'package:transition_practice/features/start/presentation/widgets/spacer_box.dart';
 import 'package:transition_practice/features/start/presentation/widgets/success_dialog.dart';
 
@@ -148,15 +149,23 @@ class _SetNewPasswordPageState extends State<SetNewPasswordPage> {
                         onTap: () {
                           showDialog(
                             context: context,
-                            builder: (context) => SuccessDialog(
-                              clampedButtonHeight: clampedButtonHeight,
-                              DialogText:
-                                  'Your password has been successfully reset. You can now login with your new password. \n\n Press Ok back to Login Page',
-                              onTap: () {
-                                Navigator.pushNamedAndRemoveUntil(context,
-                                    '/login', (Route<dynamic> route) => false);
-                              },
-                            ),
+                            builder: (context) => _isSuccessfull()
+                                ? SuccessDialog(
+                                    clampedButtonHeight: clampedButtonHeight,
+                                    DialogText:
+                                        'Your password has been successfully reset. You can now login with your new password. \n\n Press Ok back to Login Page',
+                                    onTap: () {
+                                      Navigator.pushNamedAndRemoveUntil(
+                                          context,
+                                          '/login',
+                                          (Route<dynamic> route) => false);
+                                    },
+                                  )
+                                : FailedDialog(
+                                    clampedButtonHeight: clampedButtonHeight,
+                                    DialogText:
+                                        'Failed to reset password. Please try again.',
+                                  ),
                           );
                         },
                       ),
@@ -170,4 +179,8 @@ class _SetNewPasswordPageState extends State<SetNewPasswordPage> {
       },
     );
   }
+}
+
+bool _isSuccessfull() {
+  return true;
 }

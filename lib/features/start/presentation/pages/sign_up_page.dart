@@ -266,6 +266,7 @@ class _SignUpPageState extends State<SignUpPage> {
     });
   }
 
+// Validation function here --------------------------------------------------
   bool _isValidationPass() {
     return true;
   }
