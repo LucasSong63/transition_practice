@@ -5,10 +5,10 @@ import 'package:sizer/sizer.dart';
 import 'package:transition_practice/features/start/presentation/pages/forgot_password_page.dart';
 import 'package:transition_practice/features/start/presentation/pages/set_new_password_page.dart';
 import 'package:transition_practice/features/start/presentation/pages/sign_up_page.dart';
-import 'package:transition_practice/features/start/presentation/widgets/custom_button.dart';
-import 'package:transition_practice/features/start/presentation/widgets/custom_textformfield.dart';
-import 'package:transition_practice/features/start/presentation/widgets/fade_transition_page.dart';
-import 'package:transition_practice/features/start/presentation/widgets/spacer_box.dart';
+import 'package:transition_practice/utility/custom_button.dart';
+import 'package:transition_practice/utility/custom_textformfield.dart';
+import 'package:transition_practice/utility/fade_transition_page.dart';
+import 'package:transition_practice/utility/spacer_box.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});

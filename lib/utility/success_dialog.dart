@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
-import 'package:transition_practice/features/start/presentation/widgets/custom_button.dart';
-import 'package:transition_practice/features/start/presentation/widgets/spacer_box.dart';
+import 'package:transition_practice/utility/custom_button.dart';
+import 'package:transition_practice/utility/spacer_box.dart';
 
-class FailedDialog extends StatelessWidget {
+class SuccessDialog extends StatelessWidget {
   final double clampedButtonHeight;
   final String DialogText;
+  final VoidCallback? onTap;
 
-  const FailedDialog({
+  const SuccessDialog({
     super.key,
     required this.clampedButtonHeight,
     this.DialogText = '',
+    this.onTap,
   });
 
   @override
@@ -27,12 +29,12 @@ class FailedDialog extends StatelessWidget {
                       height: 20.h,
                       width: 40.w,
                       child: Image(
-                        image: AssetImage('assets/images/failed.png'),
+                        image: AssetImage('assets/images/success.png'),
                       ),
                     ),
                     SpacerBox(30),
                     Text(
-                      'Please try again!',
+                      'Successful',
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -50,12 +52,11 @@ class FailedDialog extends StatelessWidget {
           actions: [
             Center(
                 child: CustomButton(
-                    width: double.infinity,
-                    height: clampedButtonHeight,
-                    text: 'Ok',
-                    onTap: () {
-                      Navigator.pop(context);
-                    })),
+              width: double.infinity,
+              height: clampedButtonHeight,
+              text: 'Ok',
+              onTap: onTap ?? () => Navigator.pop(context),
+            )),
           ],
         );
       },
