@@ -1,14 +1,13 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:sizer/sizer.dart';
-import 'package:transition_practice/features/start/presentation/pages/forgot_password_page.dart';
-import 'package:transition_practice/features/start/presentation/pages/set_new_password_page.dart';
-import 'package:transition_practice/features/start/presentation/pages/sign_up_page.dart';
 import 'package:transition_practice/utility/custom_button.dart';
 import 'package:transition_practice/utility/custom_textformfield.dart';
-import 'package:transition_practice/utility/fade_transition_page.dart';
+import 'package:transition_practice/utility/failed_dialog.dart';
 import 'package:transition_practice/utility/spacer_box.dart';
+import 'package:transition_practice/utility/success_dialog.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -99,8 +98,7 @@ class LoginPage extends StatelessWidget {
                     // Forgot Password Text
                     GestureDetector(
                       onTap: () {
-                        Navigator.of(context)
-                            .push(FadeTransitionPage(ForgotPasswordPage()));
+                        context.push('/forgot-password');
                       },
                       child: Container(
                         alignment: Alignment.centerRight,
@@ -118,8 +116,30 @@ class LoginPage extends StatelessWidget {
                     CustomButton(
                       text: "Login",
                       onTap: () {
-                        Navigator.of(context)
-                            .push(FadeTransitionPage(SetNewPasswordPage()));
+                        _isLoginSuccess()
+                            ? showDialog(
+                                barrierDismissible: false,
+                                context: context,
+                                builder: (context) {
+                                  return SuccessDialog(
+                                    clampedButtonHeight: clampedButtonHeight,
+                                    DialogText:
+                                        'Login Successful\n\n Please ok to proceed to the Home Page',
+                                    onTap: () {
+                                      context.go('/home');
+                                    },
+                                  );
+                                })
+                            : showDialog(
+                                barrierDismissible: false,
+                                context: context,
+                                builder: (context) {
+                                  return FailedDialog(
+                                    clampedButtonHeight: clampedButtonHeight,
+                                    DialogText:
+                                        'Login Failed. Please try again.',
+                                  );
+                                });
                       },
                       width: double.infinity,
                       height: clampedButtonHeight,
@@ -144,8 +164,7 @@ class LoginPage extends StatelessWidget {
                             ),
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
-                                Navigator.of(context).push(
-                                    FadeTransitionPage(const SignUpPage()));
+                                context.push('/sign-up');
                               },
                           ),
                         ],
@@ -161,4 +180,9 @@ class LoginPage extends StatelessWidget {
       },
     );
   }
+}
+
+bool _isLoginSuccess() {
+  // Simulate login success
+  return true;
 }

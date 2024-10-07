@@ -1,10 +1,8 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:sizer/sizer.dart';
-import 'package:transition_practice/features/start/presentation/pages/login_page.dart';
 import 'package:transition_practice/utility/custom_button.dart';
-import 'package:transition_practice/utility/fade_transition_page.dart';
-
 import 'package:transition_practice/features/start/presentation/widgets/get_started_background.dart';
 
 class GetStartedPage extends StatefulWidget {
@@ -111,8 +109,7 @@ class _GetStartedBodyState extends State<GetStartedBody> {
                   width: double.infinity,
                   height: clampedButtonHeight,
                   onTap: () {
-                    Navigator.of(context)
-                        .push(FadeTransitionPage(const LoginPage()));
+                    context.push('/login');
                   },
                 ),
               ),

@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:sizer/sizer.dart';
-import 'package:transition_practice/features/start/presentation/pages/login_page.dart';
 import 'package:transition_practice/utility/custom_button.dart';
 import 'package:transition_practice/utility/custom_textformfield.dart';
-
-import 'package:transition_practice/utility/fade_transition_page.dart';
 import 'package:transition_practice/utility/failed_dialog.dart';
 import 'package:transition_practice/utility/spacer_box.dart';
 import 'package:transition_practice/utility/success_dialog.dart';
@@ -99,13 +97,13 @@ class ForgotPasswordPage extends StatelessWidget {
                           onTap: () {
                             _isValidationPass() ///////////Validation here
                                 ? showDialog(
+                                    barrierDismissible: false,
                                     context: context,
                                     builder: (context) {
                                       return SuccessDialog(
                                         onTap: () {
-                                          Navigator.of(context).push(
-                                              FadeTransitionPage(
-                                                  const LoginPage()));
+                                          context.pop();
+                                          context.pop();
                                         },
                                         clampedButtonHeight:
                                             clampedButtonHeight,
@@ -115,6 +113,7 @@ class ForgotPasswordPage extends StatelessWidget {
                                     },
                                   )
                                 : showDialog(
+                                    barrierDismissible: false,
                                     context: context,
                                     builder: (context) {
                                       return FailedDialog(
@@ -135,6 +134,6 @@ class ForgotPasswordPage extends StatelessWidget {
   }
 
   bool _isValidationPass() {
-    return false;
+    return true;
   }
 }

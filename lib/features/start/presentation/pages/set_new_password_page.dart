@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:sizer/sizer.dart';
+import 'package:transition_practice/features/start/presentation/pages/forgot_password_page.dart';
 import 'package:transition_practice/utility/custom_button.dart';
 import 'package:transition_practice/utility/custom_textformfield.dart';
 import 'package:transition_practice/utility/failed_dialog.dart';
@@ -148,6 +150,7 @@ class _SetNewPasswordPageState extends State<SetNewPasswordPage> {
                         text: 'Update Password',
                         onTap: () {
                           showDialog(
+                            barrierDismissible: false,
                             context: context,
                             builder: (context) => _isSuccessfull()
                                 ? SuccessDialog(
@@ -155,10 +158,7 @@ class _SetNewPasswordPageState extends State<SetNewPasswordPage> {
                                     DialogText:
                                         'Your password has been successfully reset. You can now login with your new password. \n\n Press Ok back to Login Page',
                                     onTap: () {
-                                      Navigator.pushNamedAndRemoveUntil(
-                                          context,
-                                          '/login',
-                                          (Route<dynamic> route) => false);
+                                      context.go('/login');
                                     },
                                   )
                                 : FailedDialog(
