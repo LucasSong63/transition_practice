@@ -3,6 +3,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:transition_practice/features/start/presentation/pages/forgot_password_page.dart';
+import 'package:transition_practice/features/start/presentation/pages/set_new_password_page.dart';
 import 'package:transition_practice/features/start/presentation/pages/sign_up_page.dart';
 import 'package:transition_practice/features/start/presentation/widgets/custom_button.dart';
 import 'package:transition_practice/features/start/presentation/widgets/custom_textformfield.dart';
@@ -116,7 +117,10 @@ class LoginPage extends StatelessWidget {
                     // Login Button
                     CustomButton(
                       text: "Login",
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.of(context)
+                            .push(FadeTransitionPage(SetNewPasswordPage()));
+                      },
                       width: double.infinity,
                       height: clampedButtonHeight,
                     ),
