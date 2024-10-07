@@ -1,10 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:transition_practice/features/start/presentation/widgets/custom_button.dart';
+import 'package:transition_practice/features/start/presentation/widgets/custom_textformfield.dart';
 import 'package:transition_practice/features/start/presentation/widgets/spacer_box.dart';
 import 'package:transition_practice/features/start/presentation/widgets/success_dialog.dart';
 
-class SetNewPasswordPage extends StatelessWidget {
+class SetNewPasswordPage extends StatefulWidget {
+  @override
+  State<SetNewPasswordPage> createState() => _SetNewPasswordPageState();
+}
+
+class _SetNewPasswordPageState extends State<SetNewPasswordPage> {
+  final TextEditingController _passwordController = TextEditingController();
+  // Controller for password
+  final TextEditingController _repeatPasswordController =
+      TextEditingController();
+  // Controller for repeat password
+
+  bool _buttonEnabled = false;
   @override
   Widget build(BuildContext context) {
     final double pixelDensity = MediaQuery.of(context).devicePixelRatio;
@@ -13,20 +26,20 @@ class SetNewPasswordPage extends StatelessWidget {
     double clampedButtonHeight =
         (boxHeight * 0.125).clamp(15 * pixelDensity, 20 * pixelDensity);
 
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text(
-          'Set New Password',
-          style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
+    return Sizer(
+      builder: (BuildContext, Orientation, ScreenType) {
+        return Scaffold(
+          appBar: AppBar(
+            centerTitle: true,
+            title: Text(
+              'Set New Password',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ),
-        ),
-      ),
-      body: Sizer(
-        builder: (BuildContext, Orientation, ScreenType) {
-          return SingleChildScrollView(
+          body: SingleChildScrollView(
             child: Center(
               child: Container(
                 width: boxWidth,
@@ -70,25 +83,23 @@ class SetNewPasswordPage extends StatelessWidget {
                         ),
                       ),
                     ),
-                    TextField(
-                      onTapOutside: (PointerDownEvent event) {
-                        FocusScope.of(context).unfocus();
-                      },
-                      decoration: InputDecoration(
-                        hintText: 'Enter your new password',
-                        hintStyle: TextStyle(
-                          color: Colors.black.withOpacity(0.3),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.black.withOpacity(0.1),
-                          ),
-                          borderRadius: BorderRadius.circular(15),
-                        ),
+                    CustomTextFormField(
+                      showSuffixIcon: true,
+                      controller: _passwordController,
+                      obscureText: true,
+                      hintText: '******',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
                       ),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter your password';
+                        }
+                        if (value.length < 6) {
+                          return 'Password must be at least 6 characters long';
+                        }
+                        return null; // Valid input
+                      },
                     ),
                     SpacerBox(20),
                     Container(
@@ -104,49 +115,59 @@ class SetNewPasswordPage extends StatelessWidget {
                         ),
                       ),
                     ),
-                    TextField(
-                      onTapOutside: (PointerDownEvent event) {
-                        FocusScope.of(context).unfocus();
-                      },
-                      decoration: InputDecoration(
-                        hintText: 'Enter your new password',
-                        hintStyle: TextStyle(
-                          color: Colors.black.withOpacity(0.3),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.black.withOpacity(0.1),
-                          ),
-                          borderRadius: BorderRadius.circular(15),
-                        ),
+                    CustomTextFormField(
+                      showSuffixIcon: true,
+                      obscureText: true,
+                      hintText: '******',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15),
                       ),
-                    ),
-                    SpacerBox(50),
-                    CustomButton(
-                      width: boxWidth,
-                      height: clampedButtonHeight,
-                      text: 'Update Password',
-                      onTap: () {
-                        showDialog(
-                          context: context,
-                          builder: (context) => SuccessDialog(
-                            clampedButtonHeight: clampedButtonHeight,
-                            DialogText:
-                                'Your password has been successfully reset. You can now login with your new password.',
-                          ),
-                        );
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please confirm your password';
+                        }
+                        if (value != _passwordController.text) {
+                          return 'Passwords do not match';
+                        }
+                        return null; // Valid input
                       },
+                      onChanged: (value) {
+                        setState(() {
+                          _buttonEnabled = value == _passwordController.text;
+                        });
+                      },
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(
+                          bottom: boxHeight * 0.3, top: boxHeight * 0.05),
+                      child: CustomButton(
+                        enabled: _buttonEnabled,
+                        width: boxWidth,
+                        height: clampedButtonHeight,
+                        text: 'Update Password',
+                        onTap: () {
+                          showDialog(
+                            context: context,
+                            builder: (context) => SuccessDialog(
+                              clampedButtonHeight: clampedButtonHeight,
+                              DialogText:
+                                  'Your password has been successfully reset. You can now login with your new password. \n\n Press Ok back to Login Page',
+                              onTap: () {
+                                Navigator.pushNamedAndRemoveUntil(context,
+                                    '/login', (Route<dynamic> route) => false);
+                              },
+                            ),
+                          );
+                        },
+                      ),
                     ),
                   ],
                 ),
               ),
             ),
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 }

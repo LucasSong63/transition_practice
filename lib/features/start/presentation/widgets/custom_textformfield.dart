@@ -4,28 +4,30 @@ import 'package:flutter/material.dart';
 class CustomTextFormField extends StatefulWidget {
   final IconData? icon;
   final String? assetPath;
-  final String labelText;
+  final String? labelText;
   final bool obscureText;
   final String? Function(String?)? validator;
   final String hintText;
   final TextEditingController? controller;
   final bool showSuffixIcon; // New boolean flag to control the suffix icon
+  final InputBorder? border; // New property for border decoration
+  final Function(String)? onChanged; // New field for the onChanged callback
 
-  // Constructor to accept icon, labelText, obscureText, optional controller, and suffix icon flag
+  // Constructor to accept icon, labelText, obscureText, optional controller, and onChanged callback
   const CustomTextFormField({
     super.key,
-    this.icon, // Either icon or assetPath should be provided
+    this.icon, // Either icon or assetPath can be provided or neither
     this.assetPath,
-    required this.labelText,
+    this.labelText,
     this.hintText = '',
     this.obscureText =
         false, // By default, the text is not obscured (e.g., not a password)
     this.validator,
     this.controller, // Optional controller
-    this.showSuffixIcon =
-        false, // Suffix icon shown by default, can be controlled by this flag
-  }) : assert(icon != null || assetPath != null,
-            'Either icon or assetPath must be provided');
+    this.showSuffixIcon = false,
+    this.border, // Use custom border decoration if provided
+    this.onChanged, // onChanged callback
+  });
 
   @override
   State<CustomTextFormField> createState() => _CustomTextFormFieldState();
@@ -58,31 +60,39 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
             ? Padding(
                 padding: const EdgeInsets.all(11.0),
                 child: Image.asset(
-                  widget
-                      .assetPath!, // If assetPath is provided, use Image.asset
+                  widget.assetPath!,
                   width: 24,
                   height: 24,
                 ),
               )
-            : Icon(widget.icon), // Otherwise, use the icon dynamically
+            : (widget.icon != null
+                ? Icon(widget.icon)
+                : null), // Otherwise, no prefixIcon
         suffixIcon: widget.showSuffixIcon && !_isEmpty && _isValid
             ? const Icon(
                 Icons.check_sharp,
                 size: 20,
               )
             : null, // Conditionally show check icon if valid, not empty, and flag is true
-        labelText: '  ${widget.labelText}', // Set the label dynamically
+        labelText: widget.labelText != null
+            ? '  ${widget.labelText}'
+            : null, // Set the label dynamically
         hintText: widget.hintText,
         hintStyle: TextStyle(
           fontSize: 11,
           fontWeight: FontWeight.w500,
           color: Colors.black.withOpacity(0.4),
         ),
+        border: widget.border, // Use the provided border decoration
+        focusedBorder: widget.border,
       ),
       autovalidateMode: AutovalidateMode.onUserInteraction,
       validator: widget.validator,
       onChanged: (value) {
         _validateInput(value); // Validate input on change
+        if (widget.onChanged != null) {
+          widget.onChanged!(value); // Trigger the callback if provided
+        }
       },
     );
   }

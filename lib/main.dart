@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart'; // Import the Sizer package
+import 'package:transition_practice/features/start/presentation/pages/forgot_password_page.dart';
+import 'package:transition_practice/features/start/presentation/pages/login_page.dart';
+import 'package:transition_practice/features/start/presentation/pages/set_new_password_page.dart';
+import 'package:transition_practice/features/start/presentation/pages/sign_up_page.dart';
+import 'package:transition_practice/routes.dart';
 
 import 'features/start/presentation/pages/get_started_page.dart';
 
@@ -37,6 +42,13 @@ class MyApp extends StatelessWidget {
             ),
           ),
           home: const GetStartedPage(),
+          routes: {
+            RouteNames.getStarted: (context) => const GetStartedPage(),
+            RouteNames.login: (context) => const LoginPage(),
+            RouteNames.signUp: (context) => const SignUpPage(),
+            RouteNames.forgotPassword: (context) => ForgotPasswordPage(),
+            RouteNames.setNewPassword: (context) => SetNewPasswordPage(),
+          },
         );
       },
     );
