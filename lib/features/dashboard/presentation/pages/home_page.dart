@@ -1,20 +1,35 @@
-//skelton of the home page
-
+// skeleton
 import 'package:flutter/material.dart';
+import 'package:transition_practice/utility/size_utils.dart';
+import 'package:transition_practice/utility/spacer_box.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: Text('Home Page'),
+    return Center(
+      child: Stack(
+        children: [
+          Column(
+            children: [
+              SpacerBox(SizeUtils.getBoxHeight(context) * 0.1),
+              Container(
+                width: SizeUtils.getBoxWidth(context),
+                child: Row(
+                  children: [
+                    Text('Dashboard', textAlign: TextAlign.left),
+                    //notification icon
+                    Spacer(),
+                    Container(
+                        alignment: Alignment.centerRight,
+                        child: Icon(Icons.notifications_none_outlined)),
+                  ],
+                ),
+              )
+            ],
+          ),
+        ],
       ),
     );
   }

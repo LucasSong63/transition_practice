@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sizer/sizer.dart'; // Import the Sizer package
-import 'package:transition_practice/features/dashboard/presentation/pages/home_page.dart';
+import 'package:transition_practice/features/dashboard/presentation/pages/dashboard_page.dart';
 import 'package:transition_practice/features/start/presentation/pages/forgot_password_page.dart';
 import 'package:transition_practice/features/start/presentation/pages/login_page.dart';
 import 'package:transition_practice/features/start/presentation/pages/set_new_password_page.dart';
@@ -96,7 +96,7 @@ final GoRouter _router = GoRouter(
         GoRoute(
           path: 'home',
           pageBuilder: (context, state) =>
-              _fadeTransitionPage(context, state, HomePage()),
+              _fadeTransitionPage(context, state, DashboardPage()),
         )
       ],
     ),
