@@ -5,6 +5,7 @@ import 'package:sizer/sizer.dart';
 import 'package:transition_practice/utility/custom_button.dart';
 import 'package:transition_practice/utility/custom_textformfield.dart';
 import 'package:transition_practice/utility/failed_dialog.dart';
+import 'package:transition_practice/utility/size_utils.dart';
 import 'package:transition_practice/utility/spacer_box.dart';
 import 'package:transition_practice/utility/success_dialog.dart';
 
@@ -23,11 +24,6 @@ class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     return Sizer(builder: (BuildContext, Orientation, ScreenType) {
-      final double pixelDensity = MediaQuery.of(context).devicePixelRatio;
-      double boxWidth = 80.w.clamp(50.0 * pixelDensity, 800.0 * pixelDensity);
-      double boxHeight = 90.h.clamp(100 * pixelDensity, 700 * pixelDensity);
-      double clampedButtonHeight =
-          (boxHeight * 0.125).clamp(15 * pixelDensity, 23 * pixelDensity);
       return Scaffold(
           appBar: AppBar(
             backgroundColor: Colors.white,
@@ -36,14 +32,14 @@ class _SignUpPageState extends State<SignUpPage> {
           body: SingleChildScrollView(
             child: Center(
               child: Container(
-                width: boxWidth,
+                width: SizeUtils.getBoxWidth(context),
                 child: Column(
                   children: [
                     Hero(
                       tag: 'start-login', // Same tag as in the previous page
                       child: SizedBox(
                         width: double.infinity,
-                        height: boxHeight * 0.125,
+                        height: SizeUtils.getBoxHeight(context) * 0.125,
                         child: Image.asset(
                           'assets/images/logo1.png',
                           alignment: Alignment.centerLeft,
@@ -227,7 +223,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     const SpacerBox(50),
                     CustomButton(
                         width: double.infinity,
-                        height: clampedButtonHeight,
+                        height: SizeUtils.getClampedButtonHeight(context),
                         text: 'Register',
                         onTap: () {
                           _isValidationPass() /////Validation function here
@@ -241,7 +237,8 @@ class _SignUpPageState extends State<SignUpPage> {
                                           context.pop();
                                         },
                                         clampedButtonHeight:
-                                            clampedButtonHeight,
+                                            SizeUtils.getClampedButtonHeight(
+                                                context),
                                         DialogText:
                                             'Your registration has been successful! Please wait for the email to confirm your registration.');
                                   })
@@ -251,7 +248,8 @@ class _SignUpPageState extends State<SignUpPage> {
                                   builder: (context) {
                                     return FailedDialog(
                                         clampedButtonHeight:
-                                            clampedButtonHeight,
+                                            SizeUtils.getClampedButtonHeight(
+                                                context),
                                         DialogText:
                                             'Username has been taken. Please try with a different username.');
                                   });

@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:sizer/sizer.dart';
 import 'package:transition_practice/utility/custom_button.dart';
 import 'package:transition_practice/features/start/presentation/widgets/get_started_background.dart';
+import 'package:transition_practice/utility/size_utils.dart';
 
 class GetStartedPage extends StatefulWidget {
   const GetStartedPage({super.key});
@@ -44,31 +45,27 @@ class _GetStartedBodyState extends State<GetStartedBody> {
   Widget build(BuildContext context) {
     return Sizer(
       builder: (BuildContext, Orientation, ScreenType) {
-        final double pixelDensity = MediaQuery.of(context).devicePixelRatio;
-        double boxWidth = 80.w.clamp(50.0 * pixelDensity, 800.0 * pixelDensity);
-        double boxHeight = 90.h.clamp(100 * pixelDensity, 700 * pixelDensity);
-        double clampedButtonHeight =
-            (boxHeight * 0.125).clamp(15 * pixelDensity, 23 * pixelDensity);
         return Center(
             child: SingleChildScrollView(
           child: SizedBox(
-            width: boxWidth,
-            height: boxHeight,
+            width: SizeUtils.getBoxWidth(context),
+            height: SizeUtils.getBoxHeight(context),
             child: Stack(children: [
               Column(
                 children: [
                   Hero(
                     tag: 'start-login',
                     child: SizedBox(
-                      width: boxWidth,
-                      height: boxHeight * 0.2,
+                      width: SizeUtils.getBoxWidth(context),
+                      height: SizeUtils.getBoxHeight(context) * 0.2,
                       child: Image.asset('assets/images/logo1.png'),
                     ),
                   ),
-                  SizedBox(height: boxHeight * 0.05), //spacer
+                  SizedBox(
+                      height: SizeUtils.getBoxHeight(context) * 0.05), //spacer
                   Container(
-                    width: boxWidth,
-                    height: boxHeight * 0.1,
+                    width: SizeUtils.getBoxWidth(context),
+                    height: SizeUtils.getBoxHeight(context) * 0.1,
                     padding: const EdgeInsets.only(right: 65),
                     child: const AutoSizeText(
                       'Manage your assets in a single system',
@@ -79,10 +76,10 @@ class _GetStartedBodyState extends State<GetStartedBody> {
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
-                  SizedBox(height: boxHeight * 0.025),
+                  SizedBox(height: SizeUtils.getBoxHeight(context) * 0.025),
                   SizedBox(
-                    width: boxWidth,
-                    height: boxHeight * 0.25,
+                    width: SizeUtils.getBoxWidth(context),
+                    height: SizeUtils.getBoxHeight(context) * 0.25,
                     child: const AutoSizeText(
                       'Empower your business with the power of precision asset tracking today. Join the future of asset management with Zenzaiko!',
                       style: TextStyle(
@@ -101,13 +98,13 @@ class _GetStartedBodyState extends State<GetStartedBody> {
                 ],
               ),
               Positioned(
-                bottom: boxHeight * 0.15,
+                bottom: SizeUtils.getBoxHeight(context) * 0.15,
                 right: 0,
                 left: 0,
                 child: CustomButton(
                   text: "Let's Get Started",
                   width: double.infinity,
-                  height: clampedButtonHeight,
+                  height: SizeUtils.getClampedButtonHeight(context),
                   onTap: () {
                     context.push('/login');
                   },

@@ -6,6 +6,7 @@ import 'package:sizer/sizer.dart';
 import 'package:transition_practice/utility/custom_button.dart';
 import 'package:transition_practice/utility/custom_textformfield.dart';
 import 'package:transition_practice/utility/failed_dialog.dart';
+import 'package:transition_practice/utility/size_utils.dart';
 import 'package:transition_practice/utility/spacer_box.dart';
 import 'package:transition_practice/utility/success_dialog.dart';
 
@@ -16,30 +17,24 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Sizer(
       builder: (BuildContext, Orientation, ScreenType) {
-        final double pixelDensity = MediaQuery.of(context).devicePixelRatio;
-
-        double boxWidth = 80.w.clamp(50.0 * pixelDensity, 800.0 * pixelDensity);
-        double boxHeight = 90.h.clamp(100 * pixelDensity, 700 * pixelDensity);
-        double clampedButtonHeight =
-            (boxHeight * 0.125).clamp(15 * pixelDensity, 20 * pixelDensity);
         return Scaffold(
           appBar: AppBar(),
           body: SingleChildScrollView(
             // Wrap the whole body in SingleChildScrollView to allow scrolling
             child: Center(
               child: SizedBox(
-                width: boxWidth,
+                width: SizeUtils.getBoxWidth(context),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Hero(
                       tag: 'start-login', // Same tag used in the previous page
                       child: SizedBox(
-                        height: boxHeight * 0.2,
+                        height: SizeUtils.getBoxHeight(context) * 0.2,
                         child: Image.asset('assets/images/logo1.png'),
                       ),
                     ),
-                    SpacerBox(boxHeight * 0.05),
+                    SpacerBox(SizeUtils.getBoxHeight(context) * 0.05),
 
                     // Welcome Text
                     Container(
@@ -70,7 +65,7 @@ class LoginPage extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
-                    SpacerBox(boxHeight * 0.05),
+                    SpacerBox(SizeUtils.getBoxHeight(context) * 0.05),
 
                     // Username/Email TextField
                     CustomTextFormField(
@@ -122,7 +117,9 @@ class LoginPage extends StatelessWidget {
                                 context: context,
                                 builder: (context) {
                                   return SuccessDialog(
-                                    clampedButtonHeight: clampedButtonHeight,
+                                    clampedButtonHeight:
+                                        SizeUtils.getClampedButtonHeight(
+                                            context),
                                     DialogText:
                                         'Login Successful\n\n Please ok to proceed to the Home Page',
                                     onTap: () {
@@ -135,14 +132,16 @@ class LoginPage extends StatelessWidget {
                                 context: context,
                                 builder: (context) {
                                   return FailedDialog(
-                                    clampedButtonHeight: clampedButtonHeight,
+                                    clampedButtonHeight:
+                                        SizeUtils.getClampedButtonHeight(
+                                            context),
                                     DialogText:
                                         'Login Failed. Please try again.',
                                   );
                                 });
                       },
                       width: double.infinity,
-                      height: clampedButtonHeight,
+                      height: SizeUtils.getClampedButtonHeight(context),
                     ),
                     const SpacerBox(20),
 
@@ -170,7 +169,7 @@ class LoginPage extends StatelessWidget {
                         ],
                       ),
                     ),
-                    SpacerBox(boxHeight * 0.1),
+                    SpacerBox(SizeUtils.getBoxHeight(context) * 0.1),
                   ],
                 ),
               ),
@@ -181,6 +180,8 @@ class LoginPage extends StatelessWidget {
     );
   }
 }
+
+// Validation function here --------------------------------------------------
 
 bool _isLoginSuccess() {
   // Simulate login success

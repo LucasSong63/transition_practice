@@ -4,6 +4,7 @@ import 'package:sizer/sizer.dart';
 import 'package:transition_practice/utility/custom_button.dart';
 import 'package:transition_practice/utility/custom_textformfield.dart';
 import 'package:transition_practice/utility/failed_dialog.dart';
+import 'package:transition_practice/utility/size_utils.dart';
 import 'package:transition_practice/utility/spacer_box.dart';
 import 'package:transition_practice/utility/success_dialog.dart';
 
@@ -12,11 +13,6 @@ class ForgotPasswordPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Sizer(
       builder: (BuildContext, Orientation, ScreenType) {
-        final double pixelDensity = MediaQuery.of(context).devicePixelRatio;
-        double boxWidth = 80.w.clamp(50.0 * pixelDensity, 800.0 * pixelDensity);
-        double boxHeight = 90.h.clamp(100 * pixelDensity, 700 * pixelDensity);
-        double clampedButtonHeight =
-            (boxHeight * 0.125).clamp(15 * pixelDensity, 20 * pixelDensity);
         return Scaffold(
             appBar: AppBar(
               centerTitle: true,
@@ -31,8 +27,8 @@ class ForgotPasswordPage extends StatelessWidget {
             body: Center(
               child: SingleChildScrollView(
                 child: Container(
-                  width: boxWidth,
-                  height: boxHeight,
+                  width: SizeUtils.getBoxWidth(context),
+                  height: SizeUtils.getBoxHeight(context),
                   child: Column(
                     children: [
                       SpacerBox(30),
@@ -92,7 +88,7 @@ class ForgotPasswordPage extends StatelessWidget {
                       SpacerBox(30),
                       CustomButton(
                           width: double.infinity,
-                          height: clampedButtonHeight,
+                          height: SizeUtils.getClampedButtonHeight(context),
                           text: 'Send',
                           onTap: () {
                             _isValidationPass() ///////////Validation here
@@ -106,7 +102,8 @@ class ForgotPasswordPage extends StatelessWidget {
                                           context.pop();
                                         },
                                         clampedButtonHeight:
-                                            clampedButtonHeight,
+                                            SizeUtils.getClampedButtonHeight(
+                                                context),
                                         DialogText:
                                             'A password reset link has been sent to your email. Please check your email.',
                                       );
@@ -118,7 +115,8 @@ class ForgotPasswordPage extends StatelessWidget {
                                     builder: (context) {
                                       return FailedDialog(
                                         clampedButtonHeight:
-                                            clampedButtonHeight,
+                                            SizeUtils.getClampedButtonHeight(
+                                                context),
                                         DialogText:
                                             'An error occurred while sending the password reset link. Please try again.',
                                       );
