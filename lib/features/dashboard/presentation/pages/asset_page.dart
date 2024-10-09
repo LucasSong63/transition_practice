@@ -1,10 +1,20 @@
 import 'package:flutter/material.dart';
 
 class AssetPage extends StatelessWidget {
-  const AssetPage({super.key});
+  final bool isTablet;
+
+  const AssetPage({Key? key, required this.isTablet}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Text('Asset Page');
+    return Scaffold(
+      appBar: AppBar(title: Text('Asset Page')),
+      body: Center(
+        child: Text(
+          isTablet ? 'Tablet View' : 'Mobile View',
+          style: TextStyle(fontSize: 20),
+        ),
+      ),
+    );
   }
 }

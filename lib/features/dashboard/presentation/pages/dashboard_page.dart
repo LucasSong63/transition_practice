@@ -5,7 +5,8 @@ import 'package:transition_practice/features/dashboard/presentation/pages/consum
 import 'package:transition_practice/features/dashboard/presentation/pages/home_page.dart';
 import 'package:transition_practice/features/dashboard/presentation/pages/profile_page.dart';
 import 'package:transition_practice/features/dashboard/presentation/widgets/bottom_nav_bar.dart';
-import 'package:transition_practice/features/dashboard/presentation/pages/asset_lifecycle.dart'; // Import the file
+import 'package:transition_practice/features/dashboard/presentation/pages/asset_lifecycle.dart';
+import 'package:transition_practice/utility/size_utils.dart'; // Import the file
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({Key? key}) : super(key: key);
@@ -17,21 +18,11 @@ class DashboardPage extends StatefulWidget {
 class _DashboardPageState extends State<DashboardPage> {
   int _selectedIndex = 2;
 
-  // List of pages corresponding to each tab
-  final List<Widget> _pages = [
-    AssetPage(),
-    ConsumablePage(),
-    HomePage(), // Different from HomePage to avoid confusion
-    Container(), // Placeholder for AssetLifecyclePage as it shows bottom sheet
-    ProfilePage(),
-  ];
-
   // Handle tab changes
   void _onTabTapped(int index) {
     if (index == 3) {
-      // Index for AssetLifecycle tab
-      AssetLifecycle.showAssetLifecycleBottomSheet(
-          context); // Call the method from asset_lifecycle.dart
+      // Show bottom sheet when the AssetLifecycle tab is tapped
+      AssetLifecycle.showAssetLifecycleBottomSheet(context);
     } else {
       setState(() {
         _selectedIndex = index;
@@ -41,6 +32,18 @@ class _DashboardPageState extends State<DashboardPage> {
 
   @override
   Widget build(BuildContext context) {
+    // Determine if the device is a tablet (width > 600)
+    bool isTablet = SizeUtils.getBoxWidth(context) > 600;
+
+    // List of pages corresponding to each tab, passing the isTablet parameter
+    final List<Widget> _pages = [
+      AssetPage(isTablet: isTablet),
+      ConsumablePage(isTablet: isTablet),
+      HomePage(isTablet: isTablet),
+      Container(), // Placeholder for AssetLifecyclePage as it shows bottom sheet
+      ProfilePage(isTablet: isTablet),
+    ];
+
     return Sizer(builder: (BuildContext, Orientation, ScreenType) {
       return Scaffold(
         // Show the currently selected page, except when the bottom sheet is shown

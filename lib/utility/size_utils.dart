@@ -19,6 +19,6 @@ class SizeUtils {
   static double getClampedButtonHeight(BuildContext context) {
     double boxHeight = getBoxHeight(context);
     double pixelDensity = getPixelDensity(context);
-    return (boxHeight * 0.125).clamp(15 * pixelDensity, 20 * pixelDensity);
+    return (boxHeight * 0.125).clamp(15 * pixelDensity, 50 * pixelDensity);
   }
 }
