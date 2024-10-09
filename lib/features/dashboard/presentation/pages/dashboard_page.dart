@@ -17,6 +17,19 @@ class DashboardPage extends StatefulWidget {
 
 class _DashboardPageState extends State<DashboardPage> {
   int _selectedIndex = 2;
+  double? screenWidth; // Store screen width
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      // Retrieve the screen width once and store it in the state
+      setState(() {
+        screenWidth =
+            SizeUtils.getBoxWidth(context); // Get screen width using SizeUtils
+      });
+    });
+  }
 
   // Handle tab changes
   void _onTabTapped(int index) {
@@ -32,8 +45,15 @@ class _DashboardPageState extends State<DashboardPage> {
 
   @override
   Widget build(BuildContext context) {
+    // Wait until screen width is available (after the first frame is rendered)
+    if (screenWidth == null) {
+      return Center(
+          child:
+              CircularProgressIndicator()); // Show loading spinner while waiting for screen width
+    }
+
     // Determine if the device is a tablet (width > 600)
-    bool isTablet = SizeUtils.getBoxWidth(context) > 600;
+    bool isTablet = screenWidth! > 600;
 
     // List of pages corresponding to each tab, passing the isTablet parameter
     final List<Widget> _pages = [
