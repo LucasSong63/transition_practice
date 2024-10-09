@@ -181,7 +181,7 @@ class LoginPage extends StatelessWidget {
   }
 }
 
-// Validation function here --------------------------------------------------
+// Login Validation function here --------------------------------------------------
 
 bool _isLoginSuccess() {
   // Simulate login success

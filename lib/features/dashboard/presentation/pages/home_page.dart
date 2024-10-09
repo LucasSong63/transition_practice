@@ -1,4 +1,3 @@
-// skeleton
 import 'package:flutter/material.dart';
 import 'package:transition_practice/features/dashboard/presentation/widgets/clipper_home_page.dart';
 import 'package:transition_practice/utility/size_utils.dart';
@@ -15,7 +14,24 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    print(SizeUtils.getBoxWidth(context));
+    // Return different UI for mobile and tablet
+    return widget.isTablet
+        ? _buildTabletView() //
+        : _buildMobileView(); //
+  }
+
+  // Placeholder for the tablet view
+  Widget _buildTabletView() {
+    return Center(
+      child: Text(
+        'Tablet View Placeholder',
+        style: TextStyle(fontSize: 24),
+      ),
+    );
+  }
+
+  // Mobile view (current implementation)
+  Widget _buildMobileView() {
     return Center(
       child: Stack(
         children: [
@@ -36,11 +52,11 @@ class _HomePageState extends State<HomePage> {
                   child: Row(
                     children: [
                       Text('Dashboard', textAlign: TextAlign.left),
-                      //notification icon
-                      Spacer(),
+                      Spacer(), //notification icon
                       Container(
-                          alignment: Alignment.centerRight,
-                          child: Icon(Icons.notifications_none_outlined)),
+                        alignment: Alignment.centerRight,
+                        child: Icon(Icons.notifications_none_outlined),
+                      ),
                     ],
                   ),
                 ),
@@ -54,7 +70,6 @@ class _HomePageState extends State<HomePage> {
                     backgroundColor: MaterialStateProperty.all(Colors.white),
                     shadowColor: MaterialStateProperty.all(Colors.transparent),
                     controller: controller,
-                    // onTapOutside: ,
                     padding: const MaterialStatePropertyAll<EdgeInsets>(
                         EdgeInsets.symmetric(horizontal: 16.0)),
                     onTap: () {
@@ -79,7 +94,7 @@ class _HomePageState extends State<HomePage> {
                             color: Colors.grey,
                           ),
                         ),
-                      )
+                      ),
                     ],
                   );
                 }, suggestionsBuilder:

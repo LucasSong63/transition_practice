@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart'; // Import for orientation control
 import 'package:go_router/go_router.dart';
 import 'package:sizer/sizer.dart'; // Import the Sizer package
 import 'package:transition_practice/features/dashboard/presentation/pages/dashboard_page.dart';
@@ -6,10 +7,13 @@ import 'package:transition_practice/features/start/presentation/pages/forgot_pas
 import 'package:transition_practice/features/start/presentation/pages/login_page.dart';
 import 'package:transition_practice/features/start/presentation/pages/set_new_password_page.dart';
 import 'package:transition_practice/features/start/presentation/pages/sign_up_page.dart';
+import 'package:transition_practice/utility/size_utils.dart';
 
 import 'features/start/presentation/pages/get_started_page.dart';
 
 void main() {
+  WidgetsFlutterBinding
+      .ensureInitialized(); // Ensure initialization before setting orientation
   runApp(const MyApp());
 }
 
@@ -20,6 +24,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Sizer(
       builder: (context, orientation, screenType) {
+        _setOrientation(context); // Set orientation based on screen size
         return MaterialApp.router(
           routerConfig: _router,
           title: 'Hero Animation Example',
@@ -47,6 +52,38 @@ class MyApp extends StatelessWidget {
       },
     );
   }
+
+  ////// Function to set orientation based on screen width////////////////////////////////////////////////
+  void _setOrientation(BuildContext context) {
+    // Define tablet width threshold (e.g., devices with width > 600px are considered tablets)
+    bool isTablet = _isTablet(context);
+    print(isTablet);
+    print(SizeUtils.getBoxWidth(context));
+    print(SizeUtils.getPixelDensity(context));
+
+    if (isTablet) {
+      // Allow both landscape and portrait for tablets
+      SystemChrome.setPreferredOrientations([
+        DeviceOrientation.portraitUp,
+        DeviceOrientation.portraitDown,
+        DeviceOrientation.landscapeLeft,
+        DeviceOrientation.landscapeRight,
+      ]);
+    } else {
+      // Lock orientation to portrait for mobile
+      SystemChrome.setPreferredOrientations([
+        DeviceOrientation.portraitUp, // Only allow portrait mode for mobile
+      ]);
+    }
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+bool _isTablet(BuildContext context) {
+  bool isTablet =
+      SizeUtils.getBoxWidth(context) > 280 * SizeUtils.getPixelDensity(context);
+  return isTablet;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -95,8 +132,8 @@ final GoRouter _router = GoRouter(
         ),
         GoRoute(
           path: 'home',
-          pageBuilder: (context, state) =>
-              _fadeTransitionPage(context, state, DashboardPage()),
+          pageBuilder: (context, state) => _fadeTransitionPage(
+              context, state, DashboardPage(isTablet: _isTablet(context))),
         )
       ],
     ),
@@ -120,5 +157,3 @@ Page _fadeTransitionPage(
     },
   );
 }
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
