@@ -104,6 +104,11 @@ flutter:
           weight: 600
         - asset: assets/fonts/Poppins-Medium.ttf
           weight: 500
-
+    - family: Alef
+      fonts:
+        - asset: assets/fonts/Alef-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Alef-Bold.ttf
+          weight: 700
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
