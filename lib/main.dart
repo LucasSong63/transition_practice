@@ -22,6 +22,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SizeUtils.initializeMobile(context);
     return Sizer(
       builder: (context, orientation, screenType) {
         _setOrientation(context); // Set orientation based on screen size
@@ -101,7 +102,7 @@ Map<int, Color> color = {
 };
 
 MaterialColor customSwatch = MaterialColor(0xFF203B71, color);
-
+MaterialColor secondarySwatch = MaterialColor(0xd9fdfd, color);
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // GoRouter configuration
 final GoRouter _router = GoRouter(
