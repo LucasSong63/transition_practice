@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:transition_practice/features/dashboard/presentation/widgets/clipper_home_page.dart';
@@ -36,6 +38,20 @@ class _HomePageState extends State<HomePage> {
 
   // Mobile view (current implementation)////////////////////////////////////////////////////
   Widget _buildMobileView() {
+    ////////////////////////////////////////////////////
+    List<FlSpot> spots = [
+      FlSpot(1, 95),
+      FlSpot(2, 80),
+      FlSpot(3, 60),
+      FlSpot(4, 82),
+      FlSpot(5, 90),
+      FlSpot(6, 70),
+      FlSpot(7, 20),
+    ];
+//// line chart maxX always plus 1////
+    double maxX =
+        spots.map((spot) => spot.x).reduce((a, b) => a > b ? a : b) + 1;
+    ////////////////////////////////////////////////////
     return Scaffold(
       body: SingleChildScrollView(
         child: Stack(
@@ -526,10 +542,45 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     SpacerBox(8 * SizeUtils.getStaticPixelDensity()),
+                    Stack(
+                      children: [
+                        Container(
+                          height: 70 * SizeUtils.getStaticPixelDensity(),
+                          child: LineChart(
+                            LineChartData(
+                              lineBarsData: [
+                                LineChartBarData(
+                                  spots: spots,
+                                  color: Colors.lightGreen,
+                                  isCurved: true,
+                                  curveSmoothness: 0.3,
+                                ),
+                              ],
+                              titlesData: FlTitlesData(
+                                topTitles: AxisTitles(
+                                  sideTitles: SideTitles(showTitles: false),
+                                ),
+                                bottomTitles: AxisTitles(
+                                  sideTitles: SideTitles(
+                                    showTitles: true,
+                                    getTitlesWidget: bottomTitleWidgets,
+                                  ),
+                                ),
+                              ),
+                              minY: 0,
+                              maxY: 100,
+                              minX: 0,
+                              maxX: maxX,
+                            ),
+                          ),
+                        ),
+                      ],
+                    )
                   ],
                 ),
               ),
             ),
+            SpacerBox(SizeUtils.getStaticBoxHeight() * 2),
           ],
         ),
       ),
@@ -540,6 +591,7 @@ class _HomePageState extends State<HomePage> {
   ////////////////////////////////////////
   ////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
+
 ////////Search Anchor Here       ////////////////////////////////////////////////////////////////////////////////////////////////
   SearchAnchor searchAnchor_HomePage() {
     return SearchAnchor(
@@ -623,4 +675,59 @@ class LineWithIndentPainter extends CustomPainter {
   bool shouldRepaint(covariant CustomPainter oldDelegate) {
     return false;
   }
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+Widget bottomTitleWidgets(double value, TitleMeta meta) {
+  const style = TextStyle(
+    fontSize: 10,
+  );
+  Widget text;
+  switch (value.toInt()) {
+    case 1:
+      text = const Text('JAN', style: style);
+      break;
+    case 2:
+      text = const Text('FEB', style: style);
+      break;
+    case 3:
+      text = const Text('MAR', style: style);
+      break;
+    case 4:
+      text = const Text('APR', style: style);
+      break;
+    case 5:
+      text = const Text('MAY', style: style);
+      break;
+    case 6:
+      text = const Text('JUN', style: style);
+      break;
+    case 7:
+      text = const Text('JUL', style: style);
+      break;
+    case 8:
+      text = const Text('AUG', style: style);
+      break;
+    case 9:
+      text = const Text('SEPT', style: style);
+      break;
+    case 10:
+      text = const Text('OCT', style: style);
+      break;
+    case 11:
+      text = const Text('NOV', style: style);
+      break;
+    case 12:
+      text = const Text('DEC', style: style);
+      break;
+    default:
+      text = const Text('');
+      break;
+  }
+
+  return SideTitleWidget(
+    axisSide: meta.axisSide,
+    space: 10,
+    child: text,
+  );
 }
