@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:transition_practice/features/dashboard/presentation/widgets/clipper_home_page.dart';
+import 'package:transition_practice/features/dashboard/presentation/widgets/indicator.dart';
 import 'package:transition_practice/main.dart';
 import 'package:transition_practice/utility/size_utils.dart';
 import 'package:transition_practice/utility/spacer_box.dart';
+import 'package:fl_chart/fl_chart.dart';
 
 class HomePage extends StatefulWidget {
   final bool isTablet;
@@ -61,7 +63,7 @@ class _HomePageState extends State<HomePage> {
                             'Dashboard',
                             textAlign: TextAlign.left,
                             style: TextStyle(
-                              fontSize: 20,
+                              fontSize: 20.sp,
                               fontWeight: FontWeight.bold,
                               color: customSwatch,
                             ),
@@ -78,10 +80,10 @@ class _HomePageState extends State<HomePage> {
                         ],
                       ),
                     ),
-                    SpacerBox(10 * SizeUtils.getStaticPixelDensity()),
-                    /////////////////////////////////////////////////////////////////////////
+                    SpacerBox(8 * SizeUtils.getStaticPixelDensity()),
+                    //////////////////Search Bar Here///////////////////////////////////////////////////////
                     searchAnchor_HomePage(),
-                    /////////////////////////////////////////////////////////////////////////
+                    //////////////////////Four Image button start here///////////////////////////////////////////////////
                     Row(
                       children: [
                         Stack(
@@ -93,7 +95,7 @@ class _HomePageState extends State<HomePage> {
                                 width: SizeUtils.getStaticBoxWidth() * 0.2,
                                 height: SizeUtils.getStaticBoxWidth() * 0.2,
                                 decoration: BoxDecoration(
-                                  color: customSwatch.withOpacity(0.1),
+                                  color: customSwatch.withOpacity(0.05),
                                   shape: BoxShape.circle,
                                 ),
                               ),
@@ -131,7 +133,7 @@ class _HomePageState extends State<HomePage> {
                                 width: SizeUtils.getStaticBoxWidth() * 0.2,
                                 height: SizeUtils.getStaticBoxWidth() * 0.2,
                                 decoration: BoxDecoration(
-                                  color: customSwatch.withOpacity(0.1),
+                                  color: customSwatch.withOpacity(0.05),
                                   shape: BoxShape.circle,
                                 ),
                               ),
@@ -169,7 +171,7 @@ class _HomePageState extends State<HomePage> {
                                 width: SizeUtils.getStaticBoxWidth() * 0.2,
                                 height: SizeUtils.getStaticBoxWidth() * 0.2,
                                 decoration: BoxDecoration(
-                                  color: customSwatch.withOpacity(0.1),
+                                  color: customSwatch.withOpacity(0.05),
                                   shape: BoxShape.circle,
                                 ),
                               ),
@@ -207,7 +209,7 @@ class _HomePageState extends State<HomePage> {
                                 width: SizeUtils.getStaticBoxWidth() * 0.2,
                                 height: SizeUtils.getStaticBoxWidth() * 0.2,
                                 decoration: BoxDecoration(
-                                  color: customSwatch.withOpacity(0.1),
+                                  color: customSwatch.withOpacity(0.05),
                                   shape: BoxShape.circle,
                                 ),
                               ),
@@ -239,8 +241,9 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ],
                     ),
-                    /////////////////////////////////////////////////////////////////////////
-                    SpacerBox(20 * SizeUtils.getStaticPixelDensity()),
+                    ////////////////////Four Image Button End here/////////////////////////////////////////////////////
+                    SpacerBox(10 * SizeUtils.getStaticPixelDensity()),
+                    ////////////////////Four square widget start here/////////////////////////////////////////////////////
                     Row(
                       children: [
                         Container(
@@ -259,7 +262,7 @@ class _HomePageState extends State<HomePage> {
                                 child: Text(
                                   'Total Assets',
                                   style: TextStyle(
-                                    fontSize: 16.sp,
+                                    fontSize: 17.sp,
                                     fontFamily: 'Alef',
                                     letterSpacing: 0,
                                     wordSpacing: 0,
@@ -270,7 +273,7 @@ class _HomePageState extends State<HomePage> {
                                 padding: const EdgeInsets.only(left: 10),
                                 child: Text('25',
                                     style: TextStyle(
-                                      fontSize: 18.sp,
+                                      fontSize: 21.sp,
                                       fontWeight: FontWeight.bold,
                                       fontFamily: 'Alef',
                                       color: Color.fromRGBO(29, 111, 137, 1.0),
@@ -298,7 +301,7 @@ class _HomePageState extends State<HomePage> {
                                 child: Text(
                                   'Total Licenses',
                                   style: TextStyle(
-                                    fontSize: 16.sp,
+                                    fontSize: 17.sp,
                                     fontFamily: 'Alef',
                                     letterSpacing: 0,
                                     wordSpacing: 0,
@@ -309,7 +312,7 @@ class _HomePageState extends State<HomePage> {
                                 padding: const EdgeInsets.only(left: 10),
                                 child: Text('20',
                                     style: TextStyle(
-                                      fontSize: 18.sp,
+                                      fontSize: 21.sp,
                                       fontWeight: FontWeight.bold,
                                       fontFamily: 'Alef',
                                       color: Color.fromRGBO(29, 111, 137, 1.0),
@@ -328,21 +331,22 @@ class _HomePageState extends State<HomePage> {
                       children: [
                         Container(
                           width: SizeUtils.getStaticBoxWidth() * 0.48,
-                          height: SizeUtils.getStaticBoxWidth() * 0.4,
+                          height: SizeUtils.getStaticBoxWidth() * 0.48,
                           decoration: BoxDecoration(
                             color: secondarySwatch.withOpacity(0.4),
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Container(
-                                padding: const EdgeInsets.only(left: 10),
+                                padding:
+                                    const EdgeInsets.only(left: 10, top: 20),
                                 child: Text(
-                                  'Total Assets',
+                                  'Total \nConsumables',
                                   style: TextStyle(
-                                    fontSize: 16.sp,
+                                    fontSize: 17.sp,
                                     fontFamily: 'Alef',
                                     letterSpacing: 0,
                                     wordSpacing: 0,
@@ -350,10 +354,11 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ),
                               Container(
-                                padding: const EdgeInsets.only(left: 10),
-                                child: Text('25',
+                                padding:
+                                    const EdgeInsets.only(left: 10, top: 10),
+                                child: Text('10',
                                     style: TextStyle(
-                                      fontSize: 18.sp,
+                                      fontSize: 21.sp,
                                       fontWeight: FontWeight.bold,
                                       fontFamily: 'Alef',
                                       color: Color.fromRGBO(29, 111, 137, 1.0),
@@ -364,47 +369,163 @@ class _HomePageState extends State<HomePage> {
                             ],
                           ),
                         ),
-                        Spacer(),
+                        Spacer(), ////////////////////////////////////////////////////////////////////////////////////////////////////
                         Container(
                           width: SizeUtils.getStaticBoxWidth() * 0.48,
-                          height: SizeUtils.getStaticBoxWidth() * 0.25,
+                          height: SizeUtils.getStaticBoxWidth() * 0.48,
                           decoration: BoxDecoration(
                             color: secondarySwatch.withOpacity(0.4),
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Container(
-                                padding: const EdgeInsets.only(left: 10),
+                                padding:
+                                    const EdgeInsets.only(left: 10, top: 20),
                                 child: Text(
-                                  'Total Licenses',
+                                  'Current Assets Value',
                                   style: TextStyle(
-                                    fontSize: 16.sp,
+                                    fontSize: 17.sp,
                                     fontFamily: 'Alef',
                                     letterSpacing: 0,
                                     wordSpacing: 0,
                                   ),
                                 ),
                               ),
-                              Container(
-                                padding: const EdgeInsets.only(left: 10),
-                                child: Text('20',
-                                    style: TextStyle(
-                                      fontSize: 18.sp,
-                                      fontWeight: FontWeight.bold,
-                                      fontFamily: 'Alef',
-                                      color: Color.fromRGBO(29, 111, 137, 1.0),
-                                      letterSpacing: 0,
-                                      wordSpacing: 0,
-                                    )),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    SizedBox(
+                                      height:
+                                          SizeUtils.getStaticBoxWidth() * 0.22,
+                                      width:
+                                          SizeUtils.getStaticBoxWidth() * 0.22,
+                                      // padding: const EdgeInsets.only(left: 10),
+                                      child: PieChart(
+                                        PieChartData(
+                                          sections: [
+                                            PieChartSectionData(
+                                              color: customSwatch,
+                                              value: 25,
+                                              title: 'Flutter',
+                                              showTitle: false,
+                                              radius: 7,
+                                            ),
+                                            PieChartSectionData(
+                                              color: Colors.blue,
+                                              value: 20,
+                                              title: 'React',
+                                              showTitle: false,
+                                              radius: 7,
+                                            ),
+                                            PieChartSectionData(
+                                              color: Colors.green,
+                                              value: 10,
+                                              title: 'Xamarin',
+                                              showTitle: false,
+                                              radius: 7,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    Container(
+                                      padding: const EdgeInsets.only(left: 10),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: <Widget>[
+                                          Indicator(
+                                            color: customSwatch,
+                                            text: 'Flutter',
+                                            textsize: 14.sp,
+                                            isSquare: false,
+                                            size: 10.sp,
+                                          ),
+                                          Indicator(
+                                            color: Colors.blue,
+                                            text: 'React',
+                                            textsize: 14.sp,
+                                            isSquare: false,
+                                            size: 10.sp,
+                                          ),
+                                          Indicator(
+                                            color: Colors.green,
+                                            text: 'Xamarin',
+                                            textsize: 14.sp,
+                                            isSquare: false,
+                                            size: 10.sp,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ],
                           ),
                         ),
                       ],
                     ),
+                    //////////////////////////Four Square Widget End Here//////////////////////////////////////////////////////////////////////////////////////////////
+                    SpacerBox(8 * SizeUtils.getStaticPixelDensity()),
+                    ///////////////////////////Line Chart Start Here//////////////////////////////////////////////////////////////////////////////////////////////
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(top: 20.0),
+                          child: Text(
+                            "Consumables Expenses",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 17.sp,
+                              letterSpacing: 0,
+                              wordSpacing: 0,
+                            ),
+                          ),
+                        ),
+                        Container(
+                          height: 9 * SizeUtils.getStaticPixelDensity(),
+                          width: 23 * SizeUtils.getStaticPixelDensity(),
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: Colors.grey.withOpacity(0.5),
+                            ),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: DropdownButton<String>(
+                            underline: Container(),
+                            dropdownColor: Colors.white,
+                            value: '2024',
+                            onChanged: (String? newValue) {},
+                            items: <String>['2024', '2023', '2022']
+                                .map<DropdownMenuItem<String>>((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value),
+                              );
+                            }).toList(),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Container(
+                      width: SizeUtils.getStaticBoxWidth(),
+                      padding: const EdgeInsets.only(top: 10),
+                      child: CustomPaint(
+                        painter: LineWithIndentPainter(),
+                      ),
+                    ),
+                    SpacerBox(8 * SizeUtils.getStaticPixelDensity()),
                   ],
                 ),
               ),
@@ -415,6 +536,10 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  ////////////////////
+  ////////////////////////////////////////
+  ////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
 ////////Search Anchor Here       ////////////////////////////////////////////////////////////////////////////////////////////////
   SearchAnchor searchAnchor_HomePage() {
     return SearchAnchor(
@@ -472,3 +597,30 @@ class _HomePageState extends State<HomePage> {
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+class LineWithIndentPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = Colors.grey
+      ..strokeWidth = 1
+      ..style = PaintingStyle.stroke;
+
+    final path = Path();
+    path.moveTo(0, 0);
+    path.lineTo(size.width - SizeUtils.getStaticBoxWidth() * 0.36,
+        0); // Line to the middle
+    path.relativeLineTo(size.width - SizeUtils.getStaticBoxWidth() * 0.97,
+        -10); // Small diagonal indent
+    path.relativeLineTo(size.width - SizeUtils.getStaticBoxWidth() * 0.67,
+        0); // Return to the original height
+    // Return to the original height
+
+    canvas.drawPath(path, paint);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return false;
+  }
+}
