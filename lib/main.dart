@@ -22,10 +22,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SizeUtils.initializeMobile(context);
     return Sizer(
       builder: (context, orientation, screenType) {
         _setOrientation(context); // Set orientation based on screen size
+        SizeUtils.initializeMobile(context);
         return MaterialApp.router(
           routerConfig: _router,
           title: 'Hero Animation Example',
